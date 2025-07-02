@@ -1,0 +1,56 @@
+class Solution {
+    public static String infixToPostfix(String s) {
+        // code here
+        Stack<String> operand = new Stack<>();
+        Stack<Character> operator= new Stack<>();
+        int i=0;
+        
+        while(i<s.length()){
+            char ch= s.charAt(i);
+            
+            if(ch=='('){
+                operator.push(ch);
+            }else if(ch==')'){
+                while(operator.peek()!='('){
+                    String val2= operand.pop();
+                    String val1= operand.pop();
+                    char op= operator.pop();
+                    String str= val1+val2+op;
+                    operand.push(str+"");
+                }
+                operator.pop();
+            }
+            else if(ch=='^'||ch=='*'||ch=='+'||ch=='-'||ch=='/'){
+                while(operator.size() > 0 && prec(operator.peek())>=prec(ch)){
+                    String val2= operand.pop();
+                    String val1= operand.pop();
+                    char op= operator.pop();
+                    String str= val1+val2+op;
+                    operand.push(str+"");
+                }
+                operator.push(ch);
+            }
+            else{
+                operand.push(ch+"");
+            }
+            i++;
+        }
+        
+        while(operator.size()>0){
+            String val2= operand.pop();
+            String val1= operand.pop();
+            char op= operator.pop();
+            String str= val1+val2+op;
+            operand.push(str);
+        }
+        
+        return operand.pop();
+    }
+    
+    public static int prec(char c){
+       if (c == '^') return 3;
+        else if (c == '/' || c == '*') return 2;
+        else if (c == '+' || c == '-') return 1;
+        else return -1;
+    }
+}
