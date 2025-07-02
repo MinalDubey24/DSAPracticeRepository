@@ -1,0 +1,65 @@
+class Solution {
+    
+     Stack<Long> st= new Stack<>();
+    long min= Long.MAX_VALUE;;
+    //int top;
+    public Solution() {
+       // min=0;
+       // top=-1;
+    }
+    
+   
+    // Add an element to the top of Stack
+    public void push(int x) {
+        // code here
+        if(st.size()==0){
+            long diff= 0;
+            min=x;
+            st.push(diff);
+        }else{
+            long diff= x-min;
+            st.push(diff);
+            if(x<min){
+                min=x;
+            }
+            
+        }
+        
+    }
+
+    // Remove the top element from the Stack
+    public void pop() {
+        if(st.size()==0)
+           return;
+        long diff = st.pop();
+        if(diff<0){
+            long val=min-diff;
+            min=val;
+        }
+        // code here
+    }
+
+    // Returns top element of the Stack
+        
+    public long peek() {
+        if(st.size()==0) 
+           return -1;
+        long val;
+        long diff = st.peek();
+        if(diff<0){
+            val=min;
+        }else{
+            val= min+diff;
+        }
+        return val;
+    }
+
+        
+    // Finds minimum element of Stack
+    public long getMin() {
+        // code here
+         if(st.size()==0) 
+             return -1;
+        return min;
+    }
+}
