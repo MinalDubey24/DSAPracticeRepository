@@ -1,0 +1,38 @@
+//{ Driver Code Starts
+import java.io.*;
+import java.util.*;
+
+class Solution {
+    public boolean canSplit(int arr[]) {
+        // code here
+        int n = arr.length;
+        int pf[]= pfSum(arr,n);
+        
+        int preSum= pf[0];
+        int postSum= pf[n-1]- pf[0];
+            if(preSum==postSum){
+                return true;
+            }
+            
+        for(int i=1;i<n;i++){
+             preSum= pf[i];
+             postSum= pf[n-1]- pf[i];
+            if(preSum==postSum){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public int[] pfSum(int arr[],int n){
+        
+        
+        int[] pf = new int[n]; 
+        pf[0]=arr[0];
+        for(int i=1;i<n;i++){
+            pf[i]= pf[i-1]+ arr[i];
+        }
+        
+        return pf;
+    }
+}
