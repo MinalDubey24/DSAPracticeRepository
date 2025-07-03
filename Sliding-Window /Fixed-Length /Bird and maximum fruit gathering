@@ -1,0 +1,36 @@
+class Solution {
+    public int maxFruits(int[] arr, int totalTime) {
+        // code here
+        
+        int s=0,e=0;
+        
+        int sum=0;
+        int max=Integer.MIN_VALUE;
+        
+         if (arr == null || arr.length == 0 || totalTime <= 0) {
+            return 0; // Handle empty array or invalid totalTime
+        }
+
+        int n = arr.length;
+        if (totalTime > n) {
+            totalTime = n; // Adjust totalTime if it exceeds array length
+        }
+        
+        while(e<arr.length){
+            sum=sum+arr[e];
+            
+            if(e-s+1<totalTime){
+                e++;
+            }
+            else if(e-s+1==totalTime){
+                max=Math.max(sum,max);
+                sum=sum-arr[s];
+                e++;
+                s++;
+                
+            }
+        }
+        
+        return max;
+    }
+}
