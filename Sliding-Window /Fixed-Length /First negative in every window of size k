@@ -1,0 +1,39 @@
+class Solution {
+    static List<Integer> firstNegInt(int arr[], int k) {
+        // write code here
+        
+        int s=0,e=0;
+        
+        //int negEle=0;
+        
+        List<Integer> list= new ArrayList<>();
+        
+        Queue<Integer> queue= new LinkedList<>();
+        
+        while(e<arr.length){
+            
+            if(arr[e]<0){
+               queue.add(arr[e]);
+            }
+            
+            if(e-s+1<k){
+                e++;
+            }
+            else if(e-s+1==k){
+                if(queue.size()==0){
+                    list.add(0);
+                }else{
+                    list.add(queue.peek());
+                    if(arr[s]==queue.peek()){
+                        queue.remove();
+                    }
+                }
+                
+                e++;
+                s++;
+            }
+        }
+        //list.add(0);
+        return list;
+    }
+}
