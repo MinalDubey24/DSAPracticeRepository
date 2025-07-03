@@ -1,0 +1,40 @@
+// User function Template for Java
+
+class Solution {
+
+    public long maxSumWithK(long arr[], long n, long k) {
+        
+        
+        int s=0,e=0;
+        long sum=0;
+        long max=Long.MIN_VALUE;
+        
+        sum=0;
+        //int i=0;
+        while(e<k){
+            sum=sum+arr[e];
+            e++;
+        }
+        max=sum;
+        //int e=k;
+        long prev=0;
+        while(e<n){
+             sum=sum+arr[e];
+             prev=prev+arr[s];
+             
+             max=Math.max(sum,max);
+             
+             if(prev<0){
+                 sum=sum-prev;
+                 prev=0;
+                 max=Math.max(max,sum);
+             }
+             e++;
+             s++;
+            
+        }
+        
+        return max;
+        //max==Long.MIN_VALUE?-1:max;
+    }
+}
