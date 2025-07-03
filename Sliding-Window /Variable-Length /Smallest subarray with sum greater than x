@@ -1,0 +1,44 @@
+// User function Template for Java
+
+class Solution {
+
+    public static int smallestSubWithSum(int x, int[] arr) {
+        // Your code goes here
+        
+        int s=0;
+        int e=0;
+        int sum=0;
+        int minLen=Integer.MAX_VALUE;
+        //int sum=arr[0];
+       /* if(sum>x){
+            int len=s-e+1;
+            minLen= Math.min(minLen,len); 
+        } */
+        
+        while(e<arr.length){
+            
+            if(sum<=x){
+               //System.out.println("if cond" +s + " " +e);
+                sum=sum+arr[e];
+                if(sum<=x){
+                     e++;
+                }
+               
+            }else{
+               //System.out.println("else" +s +" " +e);
+                int len= e-s+1;
+                minLen= Math.min(minLen,len);
+                sum=sum-arr[s];
+                if(sum>x){
+                    s++;
+                }else{
+                    e++;
+                    s++;
+                }
+                //s++;
+            }
+        }
+        
+        return minLen==Integer.MAX_VALUE?0:minLen;
+    }
+}
