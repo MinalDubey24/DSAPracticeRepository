@@ -1,0 +1,37 @@
+class Solution {
+    ArrayList<Integer> countDistinct(int arr[], int k) {
+        // code here
+        
+        int s=0,e=0;
+        
+        ArrayList<Integer> list= new ArrayList<>();
+        
+        Map<Integer,Integer> map= new HashMap<>();
+        
+        while(e<arr.length){
+            
+            map.put(arr[e],map.getOrDefault(arr[e],0)+1);
+            
+            if(e-s+1<k){
+                e++;
+            }
+            else if(e-s+1==k){
+                
+                list.add(map.size());
+                
+                if(map.containsKey(arr[s]) && map.get(arr[s])>=1){
+                    map.put(arr[s],map.getOrDefault(arr[s],0)-1);
+                    //s++;
+                    
+                    if(map.get(arr[s])==0){
+                        map.remove(arr[s]);
+                    }
+                    s++;
+                }
+                e++;
+            }
+        }
+        
+        return list;
+    }
+}
