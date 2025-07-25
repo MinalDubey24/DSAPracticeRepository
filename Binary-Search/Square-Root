@@ -1,1 +1,27 @@
-
+class Solution {
+    int floorSqrt(int n) {
+        // code here
+        int lo= 1;
+        int hi= n;
+        int ans=0;
+        
+        while(lo<=hi){
+            int mid= lo + (hi+lo)/2;
+            
+            if(mid*mid==n) {
+                ans=mid;
+                return ans;
+            }
+            
+            else if (mid*mid<n){
+                lo=mid+1;
+                ans=mid;
+            }
+            else if(mid*mid>n){
+                hi=mid-1;
+               }
+        }
+        
+        return ans;
+    }
+}
